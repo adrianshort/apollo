@@ -6,6 +6,6 @@ class Feed
   key :last_fetched, Time, :default => nil
   timestamps!
 
-  validates :title, :link, :presence => true
+  validates :title, :presence => true
   validates_format_of :link, :with => URI::regexp(%w(http https)), :message => "must be a valid URL"
 end
