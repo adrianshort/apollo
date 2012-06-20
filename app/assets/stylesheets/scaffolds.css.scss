@@ -1,7 +1,7 @@
 body {
   background-color: #fff;
   color: #333;
-  font-family: verdana, arial, helvetica, sans-serif;
+  font-family: "Helvetica Neue", arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
   width: 800px;
@@ -9,7 +9,6 @@ body {
    }
 
 p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px; }
 
@@ -69,4 +68,10 @@ div {
 a.button, a.button:visited {
   color: #fff;
   text-decoration: none;
+}
+
+#new_feed {
+  background-color: beige;
+  padding: 5px 10px;
+  margin: 10px 0;
 }

@@ -2,10 +2,9 @@ class FeedsController < ApplicationController
   # GET /feeds
   # GET /feeds.json
   def index
+    @feed = Feed.new
     @feeds = Feed.all
     
-#     render :template => '/feeds/index.html.haml'
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @feeds }
@@ -46,7 +45,7 @@ class FeedsController < ApplicationController
 
     respond_to do |format|
       if @feed.save
-        format.html { redirect_to @feed, notice: 'Feed was successfully created.' }
+        format.html { redirect_to'/', notice: 'Feed was successfully created.' }
         format.json { render json: @feed, status: :created, location: @feed }
       else
         format.html { render action: "new" }

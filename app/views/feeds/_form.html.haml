@@ -1,4 +1,6 @@
 = form_for @feed do |f|
+  %h2 Add a feed
+
   -if @feed.errors.any?
     #error_explanation
       %h2= "#{pluralize(@feed.errors.count, "error")} prohibited this feed from being saved:"
@@ -7,14 +9,15 @@
           %li= msg
 
   .field
+  -#
     = f.label :title
     = f.text_field :title
   .field
-    = f.label :link
-    = f.text_field :link
+    = f.label "URL"
+    = f.text_field :link, :size => 120
+    = f.submit 'Save'
   -#
     .field
       = f.label :last_fetched
       = f.datetime_select :last_fetched
   .actions
-    = f.submit 'Save'

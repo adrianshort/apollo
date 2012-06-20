@@ -1,7 +1,7 @@
 class Feed
   include MongoMapper::Document
 
-  key :title, String
+  key :title, String, :default => "[New feed - hasn't been fetched yet]"
   key :link, String
   key :last_fetched, Time, :default => nil
   timestamps!
