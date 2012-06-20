@@ -16,3 +16,4 @@ production:
   database: apollo
   username: <%= ENV['MONGO_USERNAME'] %>
   password: <%= ENV['MONGO_PASSWORD'] %>
+  uri: <%= ENV['MONGOLAB_URI'] %>
