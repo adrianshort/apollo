@@ -1,0 +1,27 @@
+%h1 Feeds
+
+%p= link_to 'Add a feed', new_feed_path, :class => 'button'
+
+
+%table
+  %tr
+    %th Title
+    %th Link
+    %th Last fetched
+    %th
+    %th
+    %th
+
+  - @feeds.each do |feed|
+    %tr
+      %td= link_to feed.title, feed
+      %td= link_to feed.link, feed.link
+      %td
+        - if feed.last_fetched.nil?
+          never
+        - else
+          = time_ago_in_words feed.last_fetched
+          ago
+      %td= link_to 'Edit', edit_feed_path(feed)
+      %td= link_to 'Destroy', feed, :confirm => 'Are you sure?', :method => :delete
+

@@ -1,0 +1,14 @@
+!!!5
+%html
+  %head
+    %title Apollo
+    = javascript_include_tag "application"
+    = stylesheet_link_tag "application"
+    = csrf_meta_tag
+
+  
+  %body
+    = image_tag "TAL_logo_blue-h100.png", :size => "275x100", :alt => "Talk About Local logo"
+    = yield  
+
+
