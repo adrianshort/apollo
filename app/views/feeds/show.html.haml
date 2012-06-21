@@ -1,13 +1,29 @@
+%h1= link_to @feed.title, @feed.url
+
+%p= @feed.description
+
 %p
-  %b Title:
-  = @feed.title
+  = pluralize(@feed.posts.size, "post")
+
 %p
-  %b Link:
-  = @feed.link
+  = link_to @feed.feed_url, @feed.feed_url
+
 %p
-  %b Last fetched:
-  = @feed.last_fetched
+  - if @feed.last_fetched.nil?
+    This feed has never been fetched
+  - else
+    Last fetched 
+    = time_ago_in_words @feed.last_fetched
+    ago
+
+%table
+  - @feed.posts.each do |p|
+    %tr
+      %td= link_to p.title, p.url
+      %td= p.loc['lat']
+      %td= p.loc['lng']
+      %td= p.published
 
 = link_to 'Edit', edit_feed_path(@feed)
 \|
-= link_to 'Back', feeds_path
+= link_to 'Back', :root
