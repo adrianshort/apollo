@@ -8,7 +8,7 @@ class Feed
   key :last_fetched,  Time, :default => nil
   timestamps!
 
-  many :posts
+  many :posts, :dependent => :destroy
 
   validates :title, :presence => true
   validates_format_of :feed_url, :with => URI::regexp(%w(http https)), :message => "must be a valid URL"
