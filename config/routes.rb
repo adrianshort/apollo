@@ -1,5 +1,9 @@
 Apollo::Application.routes.draw do
-  resources :feeds
+  resources :feeds do
+    member do
+      get 'fetch'
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

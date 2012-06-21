@@ -9,6 +9,7 @@
     %th
     %th
     %th
+    %th
 
   - @feeds.each do |feed|
     %tr
@@ -21,6 +22,7 @@
         - else
           = time_ago_in_words feed.last_fetched
           ago
+      %td= link_to "Fetch", fetch_feed_url(feed)
       %td= link_to 'Edit', edit_feed_path(feed)
       %td= link_to 'Delete', feed, :confirm => "Delete #{feed.title} and all its posts?", :method => :delete
 
