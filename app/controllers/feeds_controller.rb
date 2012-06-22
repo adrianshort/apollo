@@ -3,7 +3,7 @@ class FeedsController < ApplicationController
   # GET /feeds.json
   def index
     @feed = Feed.new
-    @feeds = Feed.all
+    @feeds = Feed.all :order => :title
     
     respond_to do |format|
       format.html # index.html.erb
