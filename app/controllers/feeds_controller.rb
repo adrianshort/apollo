@@ -85,6 +85,11 @@ class FeedsController < ApplicationController
   def fetch
     @feed = Feed.find(params[:id])
     @feed.get
-    redirect_to '/', notice: 'Feed fetched OK'
+    redirect_to :back, notice: 'Feed fetched OK'
+  end
+  
+  def fetch_all
+    Feed.get_all
+    redirect_to :back, notice: 'All feeds fetched OK'
   end
 end

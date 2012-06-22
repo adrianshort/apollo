@@ -2,6 +2,8 @@
 
 %p= @feed.description
 
+%p= link_to "Fetch", fetch_feed_url(@feed), :class => "button"
+
 %p
   = pluralize(@feed.posts.size, "post")
 

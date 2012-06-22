@@ -5,6 +5,8 @@ class Feed
   key :feed_url,      String  # The URL of the RSS feed, not the website that owns it
   key :url,           String  # The URL of website. Called "link" in RSS 2.0
   key :description,   String
+  key :guid,            String # Atom id or RSS guid
+  key :generator,     String
   key :last_fetched,  Time, :default => nil
   timestamps!
 
@@ -16,8 +18,15 @@ class Feed
   after_create  :get
   
   # Fetch and parse feed contents from web
+
+  def self.get_all
+    Feed.all.each { |f| f.get }
+  end
+
   def get
+    puts "Fetching feed: #{@url}"
     Feedzirra::Feed.add_common_feed_entry_element('georss:point', :as => :point)
+    Feedzirra::Feed.add_common_feed_element('generator', :as => :generator)
 
     feed = Feedzirra::Feed.fetch_and_parse(@feed_url)
 
@@ -25,26 +34,33 @@ class Feed
       :title =>         feed.title,
       :url =>           feed.url,
       :description =>   feed.description,
+      :generator =>     feed.generator,
       :last_fetched =>  Time.now
     )
 
-    feed.entries.each do |e|
-#       puts "#{e.title} point: #{e.point}"
-      
+    feed.entries.each do |e|      
       latlng = e.point.split(' ')
-      
-      self.posts << Post.create(
+
+      attrs = {
         :title =>     e.title,
         :url =>       e.url,
         :author =>    e.author,
         :summary =>   e.summary,
         :content =>   e.content,
         :published => e.published,
+        :guid =>      e.id,
         :loc => {
           :lng => latlng[1].to_f,
           :lat => latlng[0].to_f
         }
-      )
+      }
+      
+      if Post.where(:url => e.url).size == 0
+        self.posts << Post.create(attrs)
+      else
+        Post.set({:url => e.url}, attrs)
+      end
+      
     end
     
   end
