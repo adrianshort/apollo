@@ -11,20 +11,20 @@
     %th
     %th
 
-  - @feeds.each do |feed|
+  - @feeds.each do |f|
     %tr
-      %td= link_to feed.title, feed
-      %td= link_to feed.feed_url, feed.feed_url
-      %td= feed.posts.size
+      %td= link_to f.title, f
+      %td= link_to f.feed_url, f.feed_url
+      %td= f.posts.size
       %td
-        - if feed.last_fetched.nil?
+        - if f.last_fetched.nil?
           never
         - else
-          = time_ago_in_words feed.last_fetched
+          = time_ago_in_words f.last_fetched
           ago
-      %td= link_to "Fetch", fetch_feed_url(feed)
-      %td= link_to 'Edit', edit_feed_path(feed)
-      %td= link_to 'Delete', feed, :confirm => "Delete #{feed.title} and all its posts?", :method => :delete
+      %td= link_to "Fetch", fetch_feed_url(f)
+      %td= link_to 'Edit', edit_feed_path(f)
+      %td= link_to 'Delete', f, :confirm => "Delete #{f.title} and all its posts?", :method => :delete
 
 #new_feed
   = render 'form'
