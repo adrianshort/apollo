@@ -24,7 +24,7 @@
       %td= link_to p.title, p.url
       %td= p.loc['lat']
       %td= p.loc['lng']
-      %td= p.published
+      %td= p.published.strftime("%d %b %Y %H:%M")
 
 = link_to 'Edit', edit_feed_path(@feed)
 \|

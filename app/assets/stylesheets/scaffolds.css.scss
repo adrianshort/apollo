@@ -5,7 +5,7 @@ body {
   font-size: 13px;
   line-height: 18px;
   width: 800px;
-  margin: 30px auto;
+  margin: 60px auto;
    }
 
 p, ol, ul, td {
@@ -18,7 +18,8 @@ pre {
   font-size: 11px; }
 
 a {
-  color: #000;
+  color: blue;
+  text-decoration: none;
   &:visited {
     color: #666; }
   &:hover {
@@ -74,4 +75,42 @@ a.button, a.button:visited {
   background-color: beige;
   padding: 5px 10px;
   margin: 10px 0;
+  border-radius: 20px;
+}
+
+.feed_title {
+  font-size: 2.0em;
+}
+
+table {
+  margin: 40px 0;
+}
+
+td {
+  padding: 0 20px 20px 0;
+  background-color: #fff;
+}
+
+th {
+  padding: 0 20px 10px 0;
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+h1 {
+  font-size: 3.2em;
+  font-weight: normal;
+  margin: 10px 0 40px 0;
+}
+
+h2 {
+  font-size: 2.3em;
+  font-weight: normal;
+}
+
+.logo {
+  float: right;
 }
