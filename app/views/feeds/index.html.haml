@@ -17,8 +17,6 @@
       %td
         .feed_title
           = link_to f.title, f
-        %br
-        =# link_to f.feed_url, f.feed_url
       %td.right= f.posts.size
       %td
         - if f.last_fetched.nil?
