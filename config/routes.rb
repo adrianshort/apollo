@@ -1,4 +1,6 @@
 Apollo::Application.routes.draw do
+  get "posts/near"
+
   resources :feeds do
     member do
       get 'fetch'
