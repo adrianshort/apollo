@@ -5,7 +5,7 @@ class Feed
   key :feed_url,      String  # The URL of the RSS feed, not the website that owns it
   key :url,           String  # The URL of website. Called "link" in RSS 2.0
   key :description,   String
-  key :guid,            String # Atom id or RSS guid
+  key :guid,          String # Atom id or RSS guid
   key :generator,     String
   key :last_fetched,  Time, :default => nil
   timestamps!
