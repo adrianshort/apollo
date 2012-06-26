@@ -14,13 +14,13 @@ class Post
 
   belongs_to :feed
   
-  EARTH_RADIUS_KM = 6378.0
+  EARTH_RADIUS_M = 6378000
   
-  def self.near(lat, lng, radius_km)
+  def self.near(lat, lng, radius_m)
     all(
       :loc => {
         '$nearSphere' => [ lng, lat ],
-        '$maxDistance' => radius_km / EARTH_RADIUS_KM
+        '$maxDistance' => radius_m / EARTH_RADIUS_M
     })
   end
 end
