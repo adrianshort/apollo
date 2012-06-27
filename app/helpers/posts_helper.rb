@@ -10,7 +10,20 @@ module PostsHelper
           :alt => 0
         }
       },
-      :title => post.title
+      :text => {
+        :title =>       post.title,
+        :description => post.summary,
+        :footnote =>    "From #{post.feed.title}"
+      },
+      :actions => [
+        {
+          :label =>         "Read more...",
+          :uri =>           post.url,
+          :contentType =>   "text/html",
+          :method =>        "GET",
+          :activityType =>  1
+        }
+      ]
     }
   end
 end
