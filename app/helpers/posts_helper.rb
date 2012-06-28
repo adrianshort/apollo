@@ -3,6 +3,7 @@ module PostsHelper
     # http://layar.com/documentation/browser/api/getpois-response/
     {
       :id => post._id,
+      :imageUrl => "%s%s/assets/layar-icons/tal-logo-100.png" % [ request.protocol, request.env['HTTP_HOST'] ],
       :anchor =>  {
         :geolocation => {
           :lat => post.loc['lat'],
