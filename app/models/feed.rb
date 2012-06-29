@@ -26,6 +26,8 @@ class Feed
   def get
     puts "Fetching feed: #{@url}"
     Feedzirra::Feed.add_common_feed_entry_element('georss:point', :as => :point)
+    Feedzirra::Feed.add_common_feed_entry_element('geo:lat', :as => :geo_lat)
+    Feedzirra::Feed.add_common_feed_entry_element('geo:long', :as => :geo_long)
     Feedzirra::Feed.add_common_feed_element('generator', :as => :generator)
 
     feed = Feedzirra::Feed.fetch_and_parse(@feed_url)
@@ -38,8 +40,15 @@ class Feed
       :last_fetched =>  Time.now
     )
 
-    feed.entries.each do |e|      
-      latlng = e.point.split(' ')
+    feed.entries.each do |e|
+    
+      if e.geo_lat && e.geo_long
+        latlng = [e.geo_lat, e.geo_long]
+      elsif e.point
+        latlng = e.point.split(' ')
+      else
+        next
+      end      
 
       attrs = {
         :title =>     e.title,
