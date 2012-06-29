@@ -28,5 +28,14 @@
       %td= link_to 'Edit', edit_feed_path(f), :class => "button"
       %td= link_to 'Delete', f, :confirm => "Delete #{f.title} and all its posts?", :method => :delete, :class => "button"
 
+  %tr
+    %td
+    %td.right= Post.count
+    %td
+    %td
+    %td
+    %td
+    %td
+    
 #new_feed
   = render 'form'
