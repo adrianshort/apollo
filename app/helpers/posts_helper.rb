@@ -13,7 +13,7 @@ module PostsHelper
       },
       :text => {
         :title =>       post.title,
-        :description => post.summary,
+        :description => clean_description(post.summary),
         :footnote =>    "From #{post.feed.title}"
       },
       :actions => [
@@ -26,5 +26,14 @@ module PostsHelper
         }
       ]
     }
+  end
+  
+  def clean_description(s)
+    if s.size > 137
+      s = s[0..136] + '...'
+    end
+    
+    coder = HTMLEntities.new
+    coder.decode(s.gsub(/<.+?>/, ''))
   end
 end
