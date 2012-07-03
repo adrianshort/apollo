@@ -12,7 +12,7 @@ module PostsHelper
         }
       },
       :text => {
-        :title =>       post.title,
+        :title =>       decode_entities(post.title),
         :description => clean_description(post.summary),
         :footnote =>    "From #{post.feed.title}"
       },
@@ -28,12 +28,15 @@ module PostsHelper
     }
   end
   
+  def decode_entities(s)
+    HTMLEntities.new.decode s
+  end
+  
   def clean_description(s)
     if s.size > 137
       s = s[0..136] + '...'
     end
     
-    coder = HTMLEntities.new
-    coder.decode(s.gsub(/<.+?>/, ''))
+    decode_entities(s.gsub(/<.+?>/, ''))
   end
 end
