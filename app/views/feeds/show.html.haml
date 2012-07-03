@@ -2,7 +2,11 @@
 
 %p= @feed.description
 
-%p= link_to "Fetch", fetch_feed_url(@feed), :class => "button"
+%p
+  = link_to "Fetch", fetch_feed_url(@feed), :class => "button"
+  &nbsp;
+  %a.button{ :href => "http://validator.w3.org/appc/check.cgi?url=#{@feed.feed_url}"}
+    Validate
 
 %p
   = pluralize(@feed.posts.size, "post")
