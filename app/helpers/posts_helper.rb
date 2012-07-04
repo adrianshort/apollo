@@ -33,6 +33,10 @@ module PostsHelper
   end
   
   def clean_description(s)
+    if s.nil?
+      return ""
+    end
+  
     if s.size > 137
       s = s[0..136] + '...'
     end
