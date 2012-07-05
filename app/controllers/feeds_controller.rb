@@ -1,4 +1,6 @@
 class FeedsController < ApplicationController
+  http_basic_authenticate_with :name => ENV['auth_username'], :password => ENV['auth_password']
+  
   # GET /feeds
   # GET /feeds.json
   def index
