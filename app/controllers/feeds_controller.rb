@@ -41,11 +41,7 @@ class FeedsController < ApplicationController
   # POST /feeds
   # POST /feeds.json
   def create
-    begin
-      @feed = Feed.new(params[:feed])
-    rescue
-      redirect_to '/', error: "Feed didn't parse. Please check it with the validator."
-    end
+    @feed = Feed.new(params[:feed])
 
     respond_to do |format|
       if @feed.save
