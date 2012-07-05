@@ -15,7 +15,7 @@ class Feed
   validates :title, :presence => true
   validates_format_of :feed_url, :with => URI::regexp(%w(http https)), :message => "must be a valid URL"
   
-  after_create  :get
+  before_create  :get
   
   # Fetch and parse feed contents from web
 
@@ -31,6 +31,11 @@ class Feed
     Feedzirra::Feed.add_common_feed_element('generator', :as => :generator)
 
     feed = Feedzirra::Feed.fetch_and_parse(@feed_url)
+    
+    # We fetched the feed OK but couldn't parse it. HTTP 200 OK
+    if feed.is_a? Fixnum
+      raise
+    end
 
     self.set(
       :title =>         feed.title,
