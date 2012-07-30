@@ -1,4 +1,10 @@
 Apollo::Application.routes.draw do
+  get "logout" => "sessions#destroy", :as => "logout"
+  get "login" => "sessions#new", :as => "login"
+
+  resources :users
+  resources :sessions
+    
   get "posts/near"
 
   resources :feeds do
