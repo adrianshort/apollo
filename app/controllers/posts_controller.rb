@@ -4,6 +4,12 @@ class PostsController < ApplicationController
   def near
     @posts = Post.near(params[:lat].to_f, params[:lon].to_f, params[:radius].to_f)
 
+    ErrorLog.create(
+      :ts => Time.now,
+      :params => params,
+      :pois_returned => @posts.size
+    )
+
     layar_response = {
       :layer =>         'hyparlocal',
       :hotspots =>      @posts.collect { |p| post_to_poi(p) },
