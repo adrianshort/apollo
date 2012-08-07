@@ -9,6 +9,8 @@ class Feed
   key :generator,     String
   key :last_fetched,  Time, :default => nil
   timestamps!
+  
+  ensure_index :title
 
   many :posts, :dependent => :destroy
 
