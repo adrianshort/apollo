@@ -1,23 +1,15 @@
-%h1 Listing users
+%h1 Users
+
+= link_to 'New User', new_user_path, :class => 'button'
 
 %table
   %tr
     %th Email
-    %th Crypted password
-    %th Salt
-    %th
-    %th
-    %th
+    %th Joined
 
   - @users.each do |user|
     %tr
-      %td= user.email
-      %td= user.crypted_password
-      %td= user.salt
-      %td= link_to 'Show', user
-      %td= link_to 'Edit', edit_user_path(user)
-      %td= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New User', new_user_path
+      %td= link_to user.email, "mailto:#{user.email}"
+      %td
+        = time_ago_in_words(user.created_at)
+        ago

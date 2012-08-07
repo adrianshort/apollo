@@ -1,0 +1,11 @@
+%h1 Reset your password
+
+%p Type your email address here and we'll send you a link to a page where you can choose a new password.
+
+= form_tag password_resets_path, :method => :post do
+  .field
+    = label_tag :email
+    %br
+    = text_field_tag :email
+    = submit_tag "Reset my password"
+    

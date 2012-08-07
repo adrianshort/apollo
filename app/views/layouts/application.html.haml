@@ -8,6 +8,12 @@
 
   
   %body
+    - if notice
+      %p#notice= notice
+
+    - if alert
+      %p#alert= alert
+    
     = link_to(image_tag("TAL_logo_blue-h100.png", :size => "275x100", :alt => "Talk About Local logo"), :root, :class => "logo")
     
     #userbar
@@ -16,9 +22,8 @@
         = current_user.email
         = link_to "Log out", logout_path
       - else
-        = link_to "Log in", login_path
-    
-    %p#notice= notice
+        -#
+          = link_to "Log in", login_path
     
     = yield  
 

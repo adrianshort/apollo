@@ -4,6 +4,7 @@ class User
   key :email, String
   key :crypted_password, String
   key :salt, String
+  timestamps!
   
   authenticates_with_sorcery!
 #   attr_accessible :email, :password, :password_confirmation

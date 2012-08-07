@@ -303,7 +303,7 @@ Rails.application.config.sorcery.configure do |config|
     # hammering protection, how long to wait before allowing another email to be sent.
     # Default: `5 * 60`
     #
-    # user.reset_password_time_between_emails =
+    user.reset_password_time_between_emails = 1 * 60
 
 
     # -- brute_force_protection --

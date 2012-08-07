@@ -32,7 +32,18 @@ div {
      } }
 
 #notice {
-  color: green; }
+  background-color: green;
+  color: white;
+  padding: 5px 10px;
+  font-size: 1.2rem;
+}
+
+#alert {
+  background-color: red;
+  color: white;
+  padding: 5px 10px;
+  font-size: 1.2rem;
+}
 
 .field_with_errors {
   padding: 2px;
@@ -131,4 +142,8 @@ h2 {
 .actions input {
   font-size: 1.0rem;
   border-radius: 10px;
+}
+
+#userbar {
+  background-color: #eee;
 }
