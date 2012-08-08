@@ -9,7 +9,7 @@
     Validate
 
 %p
-  = pluralize(@feed.posts.size, "post")
+  = pluralize(@feed.posts.count, "post")
 
 %p
   = link_to @feed.feed_url, @feed.feed_url
