@@ -26,8 +26,7 @@
   - @feed.posts.each do |p|
     %tr
       %td= link_to p.title, p.url
-      %td= p.loc['lat']
-      %td= p.loc['lng']
+      %td= link_to "Map", "https://maps.google.co.uk/maps?q=%s,%s&hl=en&z=18" % [ p.loc['lat'], p.loc['lng'] ], :target => "_blank"
       %td
         - unless p.published.nil?
           = p.published.strftime("%d %b %Y %H:%M")
