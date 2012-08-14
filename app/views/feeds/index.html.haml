@@ -1,5 +1,8 @@
 %h1 Apollo
 
+#new_feed
+  = render 'form'
+
 %p= link_to "Fetch all", :fetch_all, :class => "button"
 
 %table
@@ -34,6 +37,3 @@
     %td
     %td
     %td
-    
-#new_feed
-  = render 'form'
