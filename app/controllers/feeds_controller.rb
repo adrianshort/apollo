@@ -17,7 +17,7 @@ class FeedsController < ApplicationController
   # GET /feeds/1.json
   def show
     @feed = Feed.find(params[:id])
-    @posts = @feed.posts.paginate(:page => params[:page], :per_page => 20)
+    @posts = @feed.posts.sort(:published.desc).paginate(:page => params[:page], :per_page => 20)
 
     respond_to do |format|
       format.html # show.html.erb
