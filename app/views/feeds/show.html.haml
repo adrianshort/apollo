@@ -9,9 +9,7 @@
     Validate
 
 %p
-  = pluralize(@feed.posts.count, "post")
-
-%p
+  = pluralize(@feed.posts.count, "post") 
   = link_to @feed.feed_url, @feed.feed_url
 
 %p
@@ -22,7 +20,7 @@
     = time_ago_in_words @feed.last_fetched
     ago
 
-%table
+%table#feed
   - @feed.posts.each do |p|
     %tr
       %td= link_to p.title, p.url
