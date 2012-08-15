@@ -5,11 +5,15 @@
 %p
   = link_to "Fetch", fetch_feed_url(@feed), :class => "button"
   &nbsp;
-  %a.button{ :href => "http://validator.w3.org/appc/check.cgi?url=#{@feed.feed_url}"}
+  %a.button{ :href => "http://validator.w3.org/appc/check.cgi?url=#{@feed.feed_url}"}<
     Validate
+  &nbsp;
+  = link_to 'Edit', edit_feed_path(@feed), :class => "button"
 
 %p
   = pluralize(@feed.posts.count, "post") 
+
+%p
   = link_to @feed.feed_url, @feed.feed_url
 
 %p
@@ -29,6 +33,3 @@
         - unless p.published.nil?
           = p.published.strftime("%d %b %Y %H:%M")
 
-= link_to 'Edit', edit_feed_path(@feed)
-\|
-= link_to 'Back', :root
