@@ -23,7 +23,7 @@
     ago
 
 %table
-  - @feed.posts.each do |p|
+  - @posts.each do |p|
     %tr
       %td= link_to p.title, p.url
       %td= p.loc['lat']
@@ -31,6 +31,8 @@
       %td
         - unless p.published.nil?
           = p.published.strftime("%d %b %Y %H:%M")
+
+= will_paginate @posts
 
 = link_to 'Edit', edit_feed_path(@feed)
 \|
