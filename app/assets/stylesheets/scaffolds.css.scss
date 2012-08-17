@@ -1,3 +1,5 @@
+$blue: #00458f;
+
 body {
   background-color: #fff;
   color: #333;
@@ -18,10 +20,10 @@ pre {
   font-size: 1.1rem; }
 
 a {
-  color: #00458f;
+  color: $blue;
   text-decoration: none;
   &:visited {
-    color: #00458f; }
+    color: $blue; }
   &:hover {
     color: #fff;
     background-color: #ccc; 
@@ -215,7 +217,7 @@ h2 {
 .pagination {
   font-size: 1.2rem;
   .current {
-    background-color: #00458F;
+    background-color: $blue;
     color: white;
     font-style: normal;
     padding: 3px;
