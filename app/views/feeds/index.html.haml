@@ -24,8 +24,7 @@
         - if f.last_fetched.nil?
           never
         - else
-          = time_ago_in_words f.last_fetched
-          ago
+          = (time_ago_in_words(f.last_fetched) + " ago").gsub(/ +/, "&nbsp;").html_safe
       %td= link_to "Fetch", fetch_feed_url(f), :class => "button"
       %td= link_to 'Edit', edit_feed_path(f), :class => "button"
       %td= link_to 'Delete', f, :confirm => "Delete #{f.title} and all its posts?", :method => :delete, :class => "button"
