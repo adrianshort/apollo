@@ -211,3 +211,12 @@ h2 {
   font-size: 0.9rem;
 
 }
+
+.pagination {
+  .current {
+    background-color: #00458F;
+    color: white;
+    font-style: normal;
+    padding: 3px;
+  }
+}
