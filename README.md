@@ -12,7 +12,8 @@ HypARlocal is funded by [NESTA](http://www.nesta.org.uk/destination_local) and t
 What it does
 ------------
 
-Periodically 
+* Periodically pulls from a list of subscribed GeoRSS feeds into a local database
+* Serves requests from Layar in JSON format for posts (points of interest) within a radius of a specified point.
 
 Requirements
 ------------
