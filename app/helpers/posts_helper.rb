@@ -6,15 +6,15 @@ module PostsHelper
       :imageURL => "%s%s/assets/layar-icons/tal-logo-100.png" % [ request.protocol, request.env['HTTP_HOST'] ],
       :anchor =>  {
         :geolocation => {
-          :lat => post.loc['lat'],
-          :lon => post.loc['lng'],
+          :lat => post.lat,
+          :lon => post.lon,
           :alt => 0
         }
       },
       :text => {
         :title =>       decode_entities(post.title),
         :description => clean_description(post.summary),
-        :footnote =>    "From #{post.feed.title}"
+        :footnote =>    "From #{post.feed_title}"
       },
       :actions => [
         {
