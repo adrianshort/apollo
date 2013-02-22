@@ -5,15 +5,19 @@ class Feed < ActiveRecord::Base
   validates_format_of :feed_url, :with => URI::regexp(%w(http https)), :message => "must be a valid URL"
   
   after_create  :get
+  after_create  :fetch
   
   # Fetch and parse feed contents from web
 
   def self.get_all
     Feed.all.each { |f| f.get }
+  def self.fetch_all
+    Feed.all.each { |f| f.fetch }
   end
 
   def get
     puts "Fetching feed: #{@url}"
+  def fetch
     Feedzirra::Feed.add_common_feed_entry_element('georss:point', :as => :point)
     Feedzirra::Feed.add_common_feed_entry_element('geo:lat', :as => :geo_lat)
     Feedzirra::Feed.add_common_feed_entry_element('geo:long', :as => :geo_long)
