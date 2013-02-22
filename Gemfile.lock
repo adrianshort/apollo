@@ -22,6 +22,8 @@ GEM
       activesupport (= 3.2.12)
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
+    activerecord-postgresql-adapter (0.0.1)
+      pg
     activeresource (3.2.12)
       activemodel (= 3.2.12)
       activesupport (= 3.2.12)
@@ -30,9 +32,6 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
-    bson (1.8.2)
-    bson_ext (1.8.2)
-      bson (~> 1.8.2)
     builder (3.0.4)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -82,15 +81,6 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.21)
-    mm-multi-parameter-attributes (0.2.2)
-      mongo_mapper (>= 0.9.0)
-      tzinfo
-    mongo (1.8.2)
-      bson (~> 1.8.2)
-    mongo_mapper (0.12.0)
-      activemodel (~> 3.0)
-      activesupport (~> 3.0)
-      plucky (~> 0.5.2)
     multi_json (1.6.1)
     multipart-post (1.1.5)
     nokogiri (1.4.7)
@@ -101,8 +91,7 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
-    plucky (0.5.2)
-      mongo (~> 1.5)
+    pg (0.14.1)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -160,14 +149,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bson_ext
+  activerecord-postgresql-adapter
   coffee-rails (~> 3.2.1)
   feedzirra
   haml-rails
   htmlentities
   jquery-rails
-  mm-multi-parameter-attributes
-  mongo_mapper
+  pg
   rails (= 3.2.12)
   sass-rails (~> 3.2.3)
   sorcery
