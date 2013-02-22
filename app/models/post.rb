@@ -1,4 +1,4 @@
-class Post
+class Post < ActiveRecord::Base
   belongs_to :feed
   
   EARTH_RADIUS_M = 6378000
