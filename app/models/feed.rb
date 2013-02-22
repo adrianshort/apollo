@@ -1,18 +1,5 @@
 class Feed
-  include MongoMapper::Document
-
-  key :title,         String, :default => "[New feed - hasn't been fetched yet]"
-  key :feed_url,      String  # The URL of the RSS feed, not the website that owns it
-  key :url,           String  # The URL of website. Called "link" in RSS 2.0
-  key :description,   String
-  key :guid,          String # Atom id or RSS guid
-  key :generator,     String
-  key :last_fetched,  Time, :default => nil
-  timestamps!
-  
-  ensure_index :title
-
-  many :posts, :dependent => :destroy
+  has_many :posts, :dependent => :destroy
 
   validates :title, :presence => true
   validates_format_of :feed_url, :with => URI::regexp(%w(http https)), :message => "must be a valid URL"
