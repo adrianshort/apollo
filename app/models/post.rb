@@ -41,7 +41,7 @@ class Post < ActiveRecord::Base
         - radians('#{lon}') )
         + sin( radians('#{lat}') )
         * sin( radians( p.lat ) ) ) )
-        < #{radius_metres}
+        <= #{radius_metres}
         
       ORDER BY distance
 
