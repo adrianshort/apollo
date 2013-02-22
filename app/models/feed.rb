@@ -1,5 +1,6 @@
 class Feed < ActiveRecord::Base
   has_many :posts, :dependent => :destroy
+  attr_accessible :title, :url, :description, :generator, :last_fetched, :feed_url
 
   validates :title, :presence => true
   validates_format_of :feed_url, :with => URI::regexp(%w(http https)), :message => "must be a valid URL"
@@ -36,9 +37,9 @@ class Feed < ActiveRecord::Base
     feed.entries.each do |e|
     
       if e.geo_lat && e.geo_long
-        latlng = [e.geo_lat, e.geo_long]
+        latlon = [e.geo_lat, e.geo_long]
       elsif e.point
-        latlng = e.point.split(' ')
+        latlon = e.point.split(' ')
       else
         next
       end      
@@ -51,20 +52,15 @@ class Feed < ActiveRecord::Base
         :content =>   e.content,
         :published => e.published,
         :guid =>      e.id,
-        :loc => {
-          :lng => latlng[1].to_f,
-          :lat => latlng[0].to_f
-        }
+        :lon =>       latlon[1].to_f,
+        :lat =>       latlon[0].to_f
       }
       
-      if Post.where(:url => e.url).size == 0
-        self.posts << Post.create(attrs)
-      else
-        Post.set({:url => e.url}, attrs)
-      end
-      
+      # Create a new post or update an existing one
+      post = Post.find_or_initialize_by_url(e.url)
+      post.feed = self
+      post.assign_attributes(attrs)
+      post.save
     end
-    
   end
-  
 end
