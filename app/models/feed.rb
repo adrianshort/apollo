@@ -2,36 +2,30 @@ class Feed < ActiveRecord::Base
   has_many :posts, :dependent => :destroy
   attr_accessible :title, :url, :description, :generator, :last_fetched, :feed_url
 
-  validates :title, :presence => true
   validates_format_of :feed_url, :with => URI::regexp(%w(http https)), :message => "must be a valid URL"
   
-  after_create  :get
   after_create  :fetch
   
-  # Fetch and parse feed contents from web
-
-  def self.get_all
-    Feed.all.each { |f| f.get }
   def self.fetch_all
     Feed.all.each { |f| f.fetch }
   end
 
-  def get
-    puts "Fetching feed: #{@url}"
+  # Fetch and parse feed contents from web
   def fetch
+    puts "Fetching feed: #{self.feed_url}"
     Feedzirra::Feed.add_common_feed_entry_element('georss:point', :as => :point)
     Feedzirra::Feed.add_common_feed_entry_element('geo:lat', :as => :geo_lat)
     Feedzirra::Feed.add_common_feed_entry_element('geo:long', :as => :geo_long)
     Feedzirra::Feed.add_common_feed_element('generator', :as => :generator)
 
-    feed = Feedzirra::Feed.fetch_and_parse(@feed_url)
+    feed = Feedzirra::Feed.fetch_and_parse(self.feed_url)
 
-    self.set(
+    self.update_attributes(
       :title =>         feed.title,
       :url =>           feed.url,
       :description =>   feed.description,
       :generator =>     feed.generator,
-      :last_fetched =>  Time.now
+      :last_fetched =>  DateTime.now
     )
 
     feed.entries.each do |e|
@@ -42,8 +36,8 @@ class Feed < ActiveRecord::Base
         latlon = e.point.split(' ')
       else
         next
-      end      
-
+      end
+      
       attrs = {
         :title =>     e.title,
         :url =>       e.url,
