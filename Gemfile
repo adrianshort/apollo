@@ -38,3 +38,7 @@ gem 'sorcery'
 gem 'will_paginate', '~> 3.0'
 gem 'activerecord-postgresql-adapter'
 gem 'pg'
+
+group :development do
+  gem 'meta_request', '0.2.1' 
+end
