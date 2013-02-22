@@ -15,7 +15,6 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-
 module Apollo
   class Application < Rails::Application
     config.action_mailer.default_url_options = { :host => ENV['APOLLO_HOSTNAME'] }
@@ -72,9 +71,7 @@ module Apollo
     # http://mongomapper.com/documentation/getting-started/rails.html
     config.generators do |g|
       g.template_engine :haml
-      g.orm :mongo_mapper
     end
-    
     MongoMapper::Document.plugin(MongoMapper::Plugins::MultiParameterAttributes)
 #     Time.zone = 'London'
   end
