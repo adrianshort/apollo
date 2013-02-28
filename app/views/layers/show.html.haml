@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @layer.name
+
+= link_to 'Edit', edit_layer_path(@layer)
+\|
+= link_to 'Back', layers_path

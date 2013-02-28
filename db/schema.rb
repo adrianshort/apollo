@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130222125833) do
+ActiveRecord::Schema.define(:version => 20130228150425) do
 
   create_table "feeds", :force => true do |t|
     t.string   "title"
@@ -22,6 +22,19 @@ ActiveRecord::Schema.define(:version => 20130222125833) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.datetime "last_fetched"
+  end
+
+  create_table "feeds_layers", :id => false, :force => true do |t|
+    t.integer "feed_id"
+    t.integer "layer_id"
+  end
+
+  add_index "feeds_layers", ["feed_id", "layer_id"], :name => "index_feeds_layers_on_feed_id_and_layer_id"
+
+  create_table "layers", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "posts", :force => true do |t|

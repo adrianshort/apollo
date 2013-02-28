@@ -1,5 +1,6 @@
 class Feed < ActiveRecord::Base
   has_many :posts, :dependent => :destroy
+  has_and_belongs_to_many :layers
   attr_accessible :title, :url, :description, :generator, :last_fetched, :feed_url
 
   validates_format_of :feed_url, :with => URI::regexp(%w(http https)), :message => "must be a valid URL"

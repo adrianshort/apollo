@@ -1,0 +1,19 @@
+%h1 Listing layers
+
+%table
+  %tr
+    %th Name
+    %th
+    %th
+    %th
+
+  - @layers.each do |layer|
+    %tr
+      %td= layer.name
+      %td= link_to 'Show', layer
+      %td= link_to 'Edit', edit_layer_path(layer)
+      %td= link_to 'Destroy', layer, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Layer', new_layer_path

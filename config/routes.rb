@@ -1,4 +1,7 @@
 Apollo::Application.routes.draw do
+  resources :layers
+
+
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
 
