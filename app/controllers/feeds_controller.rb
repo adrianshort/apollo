@@ -44,11 +44,27 @@ class FeedsController < ApplicationController
   # POST /feeds
   # POST /feeds.json
   def create
-    @feed = Feed.new(params[:feed])
+    
+
+    Rails.logger.debug "Feed URL: %s" % params['feed']['feed_url']
+
+    if Feed.where(:feed_url => params['feed']['feed_url']).size == 1 # ensure this test returns the values we expect
+      Rails.logger.debug "Adding existing feed to a new layer"
+      @feed = Feed.where(:feed_url => params['feed']['feed_url']).first
+      @layer = Layer.find(params['feed']['new_layer_id']) # assumes that the specified layer exists
+      # Attach the existing feed to the specified layer (making sure we only add each one once)
+      @feed.layers << @layer unless @feed.layers.include?(@layer)
+    else
+      # Create a new feed
+      Rails.logger.debug "Creating a new feed"
+      @feed = Feed.new(params[:feed])
+      @layer = Layer.find(params['feed']['new_layer_id']) # assumes that the specified layer exists
+      @feed.layers << @layer unless @feed.layers.include?(@layer)
+    end
 
     respond_to do |format|
       if @feed.save
-        format.html { redirect_to '/', notice: 'Feed added OK' }
+        format.html { redirect_to @layer, notice: 'Feed added OK' }
         format.json { render json: @feed, status: :created, location: @feed }
       else
         format.html { render action: "new" }
