@@ -1,8 +1,50 @@
-%p#notice= notice
+%h1
+  Layer: 
+  = @layer.name
 
 %p
-  %b Name:
-  = @layer.name
+  API URL:
+  = "#{request.protocol}#{request.host_with_port}/posts/near.json?layer_id=#{@layer.id}"
+  
+
+%h2 Feeds
+
+#new_feed
+  = render 'feeds/form'
+
+%p= link_to "Fetch all", :fetch_all, :class => "button"
+
+%table
+  %tr
+    %th
+    %th Posts
+    %th Fetched
+    %th
+    %th
+    %th
+
+  - @layer.feeds.each do |f|
+    %tr
+      %td
+        .feed_title
+          = link_to f.title, f
+      %td.right= f.posts.count
+      %td
+        - if f.last_fetched.nil?
+          never
+        - else
+          = (time_ago_in_words(f.last_fetched) + " ago").gsub(/ +/, "&nbsp;").html_safe
+      %td= link_to "Fetch", fetch_feed_url(f), :class => "button"
+      %td= link_to 'Edit', edit_feed_path(f), :class => "button"
+      %td= link_to 'Delete', f, :confirm => "Delete #{f.title} and all its posts?", :method => :delete, :class => "button"
+
+  %tr
+    %td
+    %td.right [number of posts in this layer]
+    %td
+    %td
+    %td
+    %td
 
 = link_to 'Edit', edit_layer_path(@layer)
 \|
