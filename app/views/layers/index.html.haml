@@ -1,19 +1,10 @@
-%h1 Listing layers
+%h1 Layers
+
+= link_to 'New Layer', new_layer_path, :class => 'button'
 
 %table
-  %tr
-    %th Name
-    %th
-    %th
-    %th
-
   - @layers.each do |layer|
     %tr
-      %td= layer.name
-      %td= link_to 'Show', layer
+      %td= link_to layer.name, layer
       %td= link_to 'Edit', edit_layer_path(layer)
-      %td= link_to 'Destroy', layer, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Layer', new_layer_path
+      %td= link_to 'Delete', layer, :method => :delete, :data => { :confirm => 'Are you sure?' }
