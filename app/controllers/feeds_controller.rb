@@ -17,8 +17,8 @@ class FeedsController < ApplicationController
   # GET /feeds/1.json
   def show
     @feed = Feed.find(params[:id])
-    @posts = @feed.posts.sort(:published.desc).paginate(:page => params[:page], :per_page => 20)
-
+    @posts = @feed.posts.order("published desc").paginate(:page => params[:page], :per_page => 20)
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @feed }
@@ -44,11 +44,27 @@ class FeedsController < ApplicationController
   # POST /feeds
   # POST /feeds.json
   def create
-    @feed = Feed.new(params[:feed])
+    
+
+    Rails.logger.debug "Feed URL: %s" % params['feed']['feed_url']
+
+    if Feed.where(:feed_url => params['feed']['feed_url']).size == 1 # ensure this test returns the values we expect
+      Rails.logger.debug "Adding existing feed to a new layer"
+      @feed = Feed.where(:feed_url => params['feed']['feed_url']).first
+      @layer = Layer.find(params['feed']['new_layer_id']) # assumes that the specified layer exists
+      # Attach the existing feed to the specified layer (making sure we only add each one once)
+      @feed.layers << @layer unless @feed.layers.include?(@layer)
+    else
+      # Create a new feed
+      Rails.logger.debug "Creating a new feed"
+      @feed = Feed.new(params[:feed])
+      @layer = Layer.find(params['feed']['new_layer_id']) # assumes that the specified layer exists
+      @feed.layers << @layer unless @feed.layers.include?(@layer)
+    end
 
     respond_to do |format|
       if @feed.save
-        format.html { redirect_to '/', notice: 'Feed added OK' }
+        format.html { redirect_to @layer, notice: 'Feed added OK' }
         format.json { render json: @feed, status: :created, location: @feed }
       else
         format.html { render action: "new" }
@@ -87,12 +103,12 @@ class FeedsController < ApplicationController
   
   def fetch
     @feed = Feed.find(params[:id])
-    @feed.get
+    @feed.fetch
     redirect_to :back, notice: 'Feed fetched OK'
   end
   
   def fetch_all
-    Feed.get_all
+    Feed.fetch_all
     redirect_to :back, notice: 'All feeds fetched OK'
   end
 end

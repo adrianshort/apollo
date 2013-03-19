@@ -2,6 +2,7 @@ Apollo::Application.routes.draw do
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
 
+  resources :layers
   resources :users
   resources :sessions
   resources :password_resets
@@ -65,7 +66,7 @@ Apollo::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'feeds#index'
+  root :to => 'layers#index'
 
   # See how all your routes lay out with "rake routes"
 

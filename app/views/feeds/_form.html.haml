@@ -15,6 +15,7 @@
   .field
     = f.label "URL"
     = f.text_field :feed_url, :size => 120
+    = f.hidden_field :new_layer_id, :value => @feed.new_layer_id
     = f.submit 'Save', :id => 'submit'
   -#
     .field

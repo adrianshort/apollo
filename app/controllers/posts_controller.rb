@@ -2,13 +2,13 @@ class PostsController < ApplicationController
   include PostsHelper
   
   def near
-    @posts = Post.near(params[:lat].to_f, params[:lon].to_f, params[:radius].to_f)
+    @posts = Post.near(params[:lat].to_f, params[:lon].to_f, params[:radius].to_f, params[:layer_id])
 
-    ErrorLog.create(
-      :ts => Time.now,
-      :params => params,
-      :pois_returned => @posts.size
-    )
+#     ErrorLog.create(
+#       :ts => Time.now,
+#       :params => params,
+#       :pois_returned => @posts.size
+#     )
 
     layar_response = {
       :layer =>         'hyparlocal',

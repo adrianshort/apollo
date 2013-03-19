@@ -1,57 +1,45 @@
-class Feed
-  include MongoMapper::Document
+class Feed < ActiveRecord::Base
+  has_many :posts, :dependent => :destroy
+  has_and_belongs_to_many :layers
+  attr_accessible :title, :url, :description, :generator, :last_fetched, :feed_url
+  attr_accessor :new_layer_id # non model attribute used when creating new feeds from within a layer
 
-  key :title,         String, :default => "[New feed - hasn't been fetched yet]"
-  key :feed_url,      String  # The URL of the RSS feed, not the website that owns it
-  key :url,           String  # The URL of website. Called "link" in RSS 2.0
-  key :description,   String
-  key :guid,          String # Atom id or RSS guid
-  key :generator,     String
-  key :last_fetched,  Time, :default => nil
-  timestamps!
-  
-  ensure_index :title
-
-  many :posts, :dependent => :destroy
-
-  validates :title, :presence => true
   validates_format_of :feed_url, :with => URI::regexp(%w(http https)), :message => "must be a valid URL"
   
-  after_create  :get
+  after_create  :fetch
   
-  # Fetch and parse feed contents from web
-
-  def self.get_all
-    Feed.all.each { |f| f.get }
+  def self.fetch_all
+    Feed.all.each { |f| f.fetch }
   end
 
-  def get
-    puts "Fetching feed: #{@url}"
+  # Fetch and parse feed contents from web
+  def fetch
+    puts "Fetching feed: #{self.feed_url}"
     Feedzirra::Feed.add_common_feed_entry_element('georss:point', :as => :point)
     Feedzirra::Feed.add_common_feed_entry_element('geo:lat', :as => :geo_lat)
     Feedzirra::Feed.add_common_feed_entry_element('geo:long', :as => :geo_long)
     Feedzirra::Feed.add_common_feed_element('generator', :as => :generator)
 
-    feed = Feedzirra::Feed.fetch_and_parse(@feed_url)
+    feed = Feedzirra::Feed.fetch_and_parse(self.feed_url)
 
-    self.set(
+    self.update_attributes(
       :title =>         feed.title,
       :url =>           feed.url,
       :description =>   feed.description,
       :generator =>     feed.generator,
-      :last_fetched =>  Time.now
+      :last_fetched =>  DateTime.now
     )
 
     feed.entries.each do |e|
     
       if e.geo_lat && e.geo_long
-        latlng = [e.geo_lat, e.geo_long]
+        latlon = [e.geo_lat, e.geo_long]
       elsif e.point
-        latlng = e.point.split(' ')
+        latlon = e.point.split(' ')
       else
         next
-      end      
-
+      end
+      
       attrs = {
         :title =>     e.title,
         :url =>       e.url,
@@ -60,20 +48,15 @@ class Feed
         :content =>   e.content,
         :published => e.published,
         :guid =>      e.id,
-        :loc => {
-          :lng => latlng[1].to_f,
-          :lat => latlng[0].to_f
-        }
+        :lon =>       latlon[1].to_f,
+        :lat =>       latlon[0].to_f
       }
       
-      if Post.where(:url => e.url).size == 0
-        self.posts << Post.create(attrs)
-      else
-        Post.set({:url => e.url}, attrs)
-      end
-      
+      # Create a new post or update an existing one
+      post = Post.find_or_initialize_by_url(e.url)
+      post.feed = self
+      post.assign_attributes(attrs)
+      post.save
     end
-    
   end
-  
 end

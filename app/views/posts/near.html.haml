@@ -1,11 +1,20 @@
 %h1 Posts#near
 
 %table
+  %thead
+    %tr
+      %th
+      %th Latitude
+      %th Longitude
+      %th Distance (metres)
+      %th Published
+  %tbody
   - @posts.each do |p|
     %tr
       %td= link_to p.title, p.url
-      %td= p.loc['lat']
-      %td= p.loc['lng']
+      %td= p.lat
+      %td= p.lon
+      %td= p.distance.to_i
       %td
         - unless p.published.nil?
           = p.published.strftime("%d %b %Y %H:%M")
