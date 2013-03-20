@@ -1,4 +1,6 @@
 class LayersController < ApplicationController
+  before_filter :require_login
+  
   # GET /layers
   # GET /layers.json
   def index
