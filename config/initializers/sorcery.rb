@@ -27,7 +27,6 @@ Rails.application.config.sorcery.configure do |config|
   #
   # config.cookie_domain =
 
-
   # -- session timeout --
   # How long in seconds to keep the session alive.
   # Default: `3600`
@@ -283,17 +282,8 @@ Rails.application.config.sorcery.configure do |config|
     # manually handle how and when email is sent
     # Default: `false`
     #
-    # user.reset_password_mailer_disabled =                                      
 
-                                                                          
-    # reset password email                                                                                   
-    # method on your mailer
-    # class.
-    # Default: `:reset_password_email`
-    #
-    # user.reset_password_email_method_name =                            
 
-                                                                                         
     # how many seconds before the reset request expires. nil for never expires.
     # Default: `nil`
     #
@@ -399,6 +389,17 @@ Rails.application.config.sorcery.configure do |config|
     # Default: `:uid`
     #
     # user.provider_uid_attribute_name =
+
+    # -- remember_me --
+    # allow the remember_me cookie to settable through AJAX
+    # Default: `true`
+    #
+    # user.remember_me_httponly =
+    
+    # How long in seconds the session length will be
+    # Default: `604800`
+    #
+    user.remember_me_for = 60 * 60 * 24 * 7 # 1 week
   end
 
   # This line must come after the 'user config' block.
