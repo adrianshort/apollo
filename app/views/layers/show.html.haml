@@ -5,7 +5,9 @@
 %p
   API URL:
   = "#{request.protocol}#{request.host_with_port}/posts/near.layar?layer_id=#{@layer.id}"
-  
+  %br
+  Layar layer name:
+  = @layer.layar_name
 
 %h2 Feeds
 

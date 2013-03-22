@@ -9,9 +9,10 @@ class PostsController < ApplicationController
 #       :params => params,
 #       :pois_returned => @posts.size
 #     )
+    @layer = Layer.find(params[:layer_id])
 
     layar_response = {
-      :layer =>         'hyparlocal',
+      :layer =>         @layer.layar_name,
       :hotspots =>      @posts.collect { |p| post_to_poi(p) },
       :errorCode =>     0, # OK
       :errorString =>   "OK",
