@@ -84,4 +84,14 @@ class LayersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # DELETE /layers/1/delete_feed
+  # This only deletes the relation between the layer and the feed. The feed (and its posts) are retained.
+  # Currently there's no way for the user to actually delete a feed completely.
+  def delete_feed
+    @layer = Layer.find(params[:id])
+    @feed = Feed.find(params[:feed_id])
+    @layer.feeds.delete(@feed)
+    redirect_to @layer, notice: "Deleted feed #{@feed.title} from this layer"
+  end
 end

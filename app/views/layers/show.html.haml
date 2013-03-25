@@ -38,7 +38,7 @@
           = (time_ago_in_words(f.last_fetched) + " ago").gsub(/ +/, "&nbsp;").html_safe
       %td= link_to "Fetch", fetch_feed_url(f), :class => "button"
       %td= link_to 'Edit', edit_feed_path(f), :class => "button"
-      %td= link_to 'Delete', f, :confirm => "Delete #{f.title} and all its posts?", :method => :delete, :class => "button"
+      %td= link_to 'Delete', delete_feed_layer_path(:feed_id => f.id), :confirm => "Delete #{f.title} from this layer?", :method => :delete, :class => "button"
 
   %tr
     %td

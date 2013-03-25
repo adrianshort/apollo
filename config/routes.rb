@@ -2,7 +2,12 @@ Apollo::Application.routes.draw do
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
 
-  resources :layers
+  resources :layers do
+    member do
+      delete "delete_feed"
+    end
+  end
+
   resources :users
   resources :sessions
   resources :password_resets
