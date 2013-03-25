@@ -14,7 +14,7 @@ Apollo::Application.routes.draw do
     
   get "posts/near"
 
-  resources :feeds do
+  resources :feeds, :except => :destroy do
     member do
       get 'fetch'
     end
