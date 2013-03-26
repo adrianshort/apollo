@@ -9,7 +9,7 @@ class Feed < ActiveRecord::Base
   after_create  :fetch
   
   def self.fetch_all
-    Feed.all.each { |f| f.fetch }
+    Feed.all.each { |f| f.delay.fetch }
   end
 
   # Fetch and parse feed contents from web
