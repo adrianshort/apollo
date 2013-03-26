@@ -1,4 +1,5 @@
 class Feed < ActiveRecord::Base
+  include HerokuDelayedJobAutoscale::Autoscale
   has_many :posts, :dependent => :destroy
   has_and_belongs_to_many :layers
   attr_accessible :title, :url, :description, :generator, :last_fetched, :feed_url
