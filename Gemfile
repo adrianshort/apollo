@@ -37,7 +37,6 @@ gem 'activerecord-postgresql-adapter'
 gem 'pg'
 gem 'delayed_job_active_record'
 gem 'daemons'
-gem 'heroku_delayed_job_autoscale'
 
 group :production do
 	gem 'unicorn'
