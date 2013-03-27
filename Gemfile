@@ -37,6 +37,7 @@ gem 'activerecord-postgresql-adapter'
 gem 'pg'
 gem 'delayed_job_active_record'
 gem 'daemons'
+gem 'workless'
 
 group :production do
 	gem 'unicorn'
