@@ -35,6 +35,9 @@ gem 'sorcery'
 gem 'will_paginate', '~> 3.0'
 gem 'activerecord-postgresql-adapter'
 gem 'pg'
+gem 'delayed_job_active_record'
+gem 'daemons'
+gem 'workless'
 
 group :production do
 	gem 'unicorn'
