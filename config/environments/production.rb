@@ -60,5 +60,9 @@ Apollo::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-
+  
+  # Workless
+  config.after_initialize do 
+    Delayed::Job.scaler = :heroku_cedar
+  end
 end
