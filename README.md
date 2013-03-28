@@ -3,7 +3,7 @@ Apollo
 
 A [GeoRSS](http://en.wikipedia.org/wiki/GeoRSS) aggregator and augmented reality server for [Layar](http://layar.com/)
 
-© 2012 Adrian Short and Charlotte Gilhooly at [Headline Data](http://headlinedata.com/)
+© 2012-3 Adrian Short and Charlotte Gilhooly at [Headline Data](http://headlinedata.com/)
 
 This software was commissioned by [Talk About Local](http://talkaboutlocal.org.uk/) as part of the [HypARlocal](http://talkaboutlocal.org.uk/ar/) project.
 
@@ -19,8 +19,7 @@ Requirements
 ------------
 
 * Rails 3
-* MongoDB
-* MongoMapper
+* Postgresql
 * Feedzilla
 
 
