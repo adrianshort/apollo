@@ -19,6 +19,9 @@ class LayersController < ApplicationController
     @feed = Feed.new
     @feed.new_layer_id = @layer.id
 
+    @layer_posts = 0
+    @layer.feeds.each { |f| @layer_posts += f.posts.size }
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @layer }
