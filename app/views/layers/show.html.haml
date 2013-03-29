@@ -24,8 +24,9 @@
     %th
     %th
     %th
-
+  - @layer_posts = 0
   - @layer.feeds.each do |f|
+    - @layer_posts += f.posts.count
     %tr
       %td
         .feed_title
