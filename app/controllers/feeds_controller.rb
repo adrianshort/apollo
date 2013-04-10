@@ -59,18 +59,8 @@ class FeedsController < ApplicationController
     end
   end
 
-  # DELETE /feeds/1
-  # DELETE /feeds/1.json
-  # def destroy
-  #   @feed = Feed.find(params[:id])
-  #   @feed.destroy
-  #
-  #   respond_to do |format|
-  #     format.html { redirect_to feeds_url, notice: 'Feed deleted OK' }
-  #     format.json { head :no_content }
-  #   end
-  # end
-  
+  # Feeds are never deleted. They're always retained in the DB.
+
   def fetch
     @feed = Feed.find(params[:id])
     @feed.fetch
