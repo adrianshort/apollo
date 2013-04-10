@@ -9,16 +9,7 @@
           %li= msg
 
   .field
-  -#
-    = f.label :title
-    = f.text_field :title
-  .field
     = f.label "URL"
     = f.text_field :feed_url, :size => 120
-    = f.hidden_field :new_layer_id, :value => @feed.new_layer_id
     = f.submit 'Save', :id => 'submit'
-  -#
-    .field
-      = f.label :last_fetched
-      = f.datetime_select :last_fetched
   .actions

@@ -1,4 +1,5 @@
 class Layer < ActiveRecord::Base
   attr_accessible :name
-  has_and_belongs_to_many :feeds
+  has_many :subscriptions
+  has_many :feeds, :through => :subscriptions, :uniq => true
 end
