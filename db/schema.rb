@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130408142010) do
+ActiveRecord::Schema.define(:version => 20130410153407) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20130408142010) do
     t.integer  "layer_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "icon_url"
   end
 
   add_index "subscriptions", ["feed_id", "layer_id"], :name => "index_feeds_layers_on_feed_id_and_layer_id", :unique => true
