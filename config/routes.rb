@@ -11,10 +11,11 @@ Apollo::Application.routes.draw do
   resources :users
   resources :sessions
   resources :password_resets
+  resources :subscriptions
     
   get "posts/near"
 
-  resources :feeds, :except => :destroy do
+  resources :feeds, :except => [ :create, :destroy ] do
     member do
       get 'fetch'
     end

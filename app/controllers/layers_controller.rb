@@ -16,8 +16,7 @@ class LayersController < ApplicationController
   # GET /layers/1.json
   def show
     @layer = Layer.find(params[:id])
-    @feed = Feed.new
-    @feed.new_layer_id = @layer.id
+    @subscription = Subscription.new(:layer_id => @layer.id)
 
     respond_to do |format|
       format.html # show.html.erb

@@ -75,6 +75,7 @@ module Apollo
     # http://mongomapper.com/documentation/getting-started/rails.html
     config.generators do |g|
       g.template_engine :haml
+      g.stylesheets false
     end
 #     Time.zone = 'London'
   end

@@ -1,6 +1,8 @@
 class Layer < ActiveRecord::Base
+  has_many :subscriptions
+  has_many :feeds, :through => :subscriptions, :uniq => true
+
   attr_accessible :name
-  has_and_belongs_to_many :feeds
 
   # Unique name for Layar layer
   def layar_name

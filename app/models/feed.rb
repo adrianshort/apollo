@@ -1,6 +1,7 @@
 class Feed < ActiveRecord::Base
   has_many :posts, :dependent => :destroy
-  has_and_belongs_to_many :layers
+  has_many :subscriptions
+  has_many :layers, :through => :subscriptions, :uniq => true
   attr_accessible :title, :url, :description, :generator, :last_fetched, :feed_url
   attr_accessor :new_layer_id # non model attribute used when creating new feeds from within a layer
 
