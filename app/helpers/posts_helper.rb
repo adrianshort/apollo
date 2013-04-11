@@ -43,7 +43,7 @@ module PostsHelper
            :angle => 0   
         },  
         :translate => { :x => 0, :y => -0.075, :z => 0 },  
-        :scale => 0.01
+        :scale => 1.0
       }
     end
     res
