@@ -40,7 +40,9 @@
       %td= link_to "Fetch", fetch_feed_url(s.feed), :class => "button"
       %td= link_to 'Edit', edit_feed_path(s.feed), :class => "button"
       %td= link_to 'Delete', s, :confirm => "Delete #{s.feed.title}?", :method => :delete, :class => "button"
-      %td= link_to 'Edit icon', edit_subscription_path(s), :class => "button"
+      %td
+        %a.button{ :href => edit_subscription_path(s) }
+          Edit&nbsp;icon
       %td
         - unless s.icon_url.blank?
           = image_tag s.icon_url
