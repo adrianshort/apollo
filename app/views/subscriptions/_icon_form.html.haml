@@ -1,0 +1,21 @@
+%h1 Custom feed icon
+
+%p
+  Layer:
+  = link_to @subscription.layer.name, @subscription.layer
+
+%p Specify the URL for an icon (JPG or PNG image) and it'll display for all posts in this feed in Layar.
+
+= form_for @subscription do |f|
+
+  -if @subscription.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@subscription.errors.count, "error")} prohibited this feed from being saved:"
+      %ul
+        - @subscription.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label "Icon URL"
+    = f.text_field :icon_url, :size => 120
+    = f.submit 'Save', :id => 'submit'

@@ -33,6 +33,28 @@ class SubscriptionsController < ApplicationController
 	  end
 	end
 
+  # GET /subscriptions/1/edit
+  def edit
+    @subscription = Subscription.find(params[:id])
+  end
+
+  # PUT /subscriptions/1
+  # PUT /subscriptions/1.json
+  def update
+    @subscription = Subscription.find(params[:id])
+
+    respond_to do |format|
+      if @subscription.update_attributes(params[:subscription])
+        format.html { redirect_to @subscription.layer, notice: 'Subscription updated OK' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @subscription.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
 	def destroy
     @subscription = Subscription.find(params[:id])
     @layer = @subscription.layer

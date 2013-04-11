@@ -23,6 +23,7 @@ class Post < ActiveRecord::Base
         p.lat,
         p.lon,
         p.published,
+        p.feed_id,
         f.title as feed_title,
         ( #{EARTH_RADIUS_METRES}
         * acos( cos( radians('#{lat}') )
