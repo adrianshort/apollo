@@ -1,8 +1,8 @@
 module PostsHelper
-  def post_to_poi(post)
+  def post_to_poi(post, subscription)
     # http://layar.com/documentation/browser/api/getpois-response/
     {
-      :id => post._id,
+      :id => post.id,
       :imageURL => "%s%s/assets/layar-icons/tal-logo-100.png" % [ request.protocol, request.env['HTTP_HOST'] ],
       :anchor =>  {
         :geolocation => {
@@ -23,8 +23,14 @@ module PostsHelper
           :contentType =>   "text/html",
           :method =>        "GET",
           :activityType =>  1
-        }
-      ]
+        },
+      ],
+      :object => {
+        :contentType => "image/vnd.layar.generic",
+        :url => subscription.icon_url,
+        :reducedURL => subscription.icon_url,
+        :size => 120        
+      }
     }
   end
   

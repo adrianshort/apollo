@@ -13,7 +13,7 @@ class PostsController < ApplicationController
 
     layar_response = {
       :layer =>         @layer.layar_name,
-      :hotspots =>      @posts.collect { |p| post_to_poi(p) },
+      :hotspots =>      @posts.collect { |p| post_to_poi(p, Subscription.where(:feed_id => p.feed_id, :layer_id => @layer.id).first) },
       :errorCode =>     0, # OK
       :errorString =>   "OK",
       :radius =>        params[:radius].to_f
