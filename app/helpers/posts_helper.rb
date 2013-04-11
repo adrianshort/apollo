@@ -32,7 +32,10 @@ module PostsHelper
         :contentType => "image/vnd.layar.generic",
         :url => subscription.icon_url,
         :reducedURL => subscription.icon_url,
-        :size => 120        
+        :size => 10        
+      }
+      res[:transform] = {
+        :rel => true # icon always faces the user
       }
     end
     res
