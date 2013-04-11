@@ -1,7 +1,7 @@
 module PostsHelper
   def post_to_poi(post, subscription)
     # http://layar.com/documentation/browser/api/getpois-response/
-    {
+    res = {
       :id => post.id,
       :imageURL => "%s%s/assets/layar-icons/tal-logo-100.png" % [ request.protocol, request.env['HTTP_HOST'] ],
       :anchor =>  {
@@ -24,14 +24,18 @@ module PostsHelper
           :method =>        "GET",
           :activityType =>  1
         },
-      ],
-      :object => {
+      ]
+    }
+
+    unless subscription.icon_url.blank?
+      res[:object] = {
         :contentType => "image/vnd.layar.generic",
         :url => subscription.icon_url,
         :reducedURL => subscription.icon_url,
         :size => 120        
       }
-    }
+    end
+    res
   end
   
   def decode_entities(s)
