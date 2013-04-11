@@ -34,8 +34,16 @@ module PostsHelper
         :reducedURL => subscription.icon_url,
         :size => 60        
       }
+
+      # http://layar.com/documentation/browser/api/getpois-response/hotspots/
       res[:transform] = {
-        :rel => true # icon always faces the user
+        :rotate => {  
+           :rel => true,    
+           :axis => { :x => 0, :y => 0, :z => 1 },
+           :angle => 0   
+        },  
+        :translate => { :x => 0, :y => -0.075, :z => 0 },  
+        :scale => 0.01
       }
     end
     res
