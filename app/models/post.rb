@@ -23,6 +23,7 @@ class Post < ActiveRecord::Base
         p.lat,
         p.lon,
         p.published,
+        p.feed_id,
         f.title as feed_title,
         ( #{EARTH_RADIUS_METRES}
         * acos( cos( radians('#{lat}') )
@@ -42,15 +43,15 @@ class Post < ActiveRecord::Base
         ( -- Subquery returns a list of post_ids for posts on this layer
           SELECT p.id
 
-          FROM feeds_layers fl
+          FROM subscriptions s
           
           INNER JOIN feeds f
-          ON fl.feed_id = f.id
+          ON s.feed_id = f.id
 
           INNER JOIN posts p
           ON p.feed_id = f.id
 
-          WHERE fl.layer_id = #{layer_id}
+          WHERE s.layer_id = #{layer_id}
         )
           
         AND
