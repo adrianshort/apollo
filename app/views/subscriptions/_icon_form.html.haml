@@ -18,4 +18,8 @@
   .field
     = f.label "Icon URL"
     = f.text_field :icon_url, :size => 120
+  .field
+    = f.label "Size (metres)"
+    = f.text_field :icon_size, :size => 3
+  %p
     = f.submit 'Save', :id => 'submit'
