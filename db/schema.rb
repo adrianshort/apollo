@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130410153407) do
+ActiveRecord::Schema.define(:version => 20130417153542) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20130410153407) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.datetime "last_fetched"
+    t.string   "favicon_url"
   end
 
   create_table "layers", :force => true do |t|
@@ -67,6 +68,7 @@ ActiveRecord::Schema.define(:version => 20130410153407) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "icon_url"
+    t.integer  "icon_size",  :default => 12
   end
 
   add_index "subscriptions", ["feed_id", "layer_id"], :name => "index_feeds_layers_on_feed_id_and_layer_id", :unique => true
