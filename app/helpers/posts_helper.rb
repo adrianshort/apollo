@@ -32,7 +32,7 @@ module PostsHelper
         :contentType => "image/vnd.layar.generic",
         :url => subscription.icon_url,
         :reducedURL => subscription.icon_url,
-        :size => 60        
+        :size => subscription.icon_size      
       }
 
       # http://layar.com/documentation/browser/api/getpois-response/hotspots/
