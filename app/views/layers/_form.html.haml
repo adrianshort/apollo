@@ -8,6 +8,13 @@
 
   .field
     = f.label :name
+    %br
     = f.text_field :name
+  %br
+  .field
+    = f.label "Icon URL (optional)"
+    %br
+    = f.text_field :icon_url, :size => 60
+  %br
   .actions
     = f.submit 'Save'
