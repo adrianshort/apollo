@@ -49,7 +49,7 @@ module PostsHelper
            :axis => { :x => 0, :y => 0, :z => 1 },
            :angle => 0   
         },  
-        :translate => { :x => 0, :y => -0.075, :z => 0 },  
+        :translate => { :x => 0, :y => -0.075, :z => 3 },  
         :scale => 1.0
       }
     end
