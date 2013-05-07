@@ -47,16 +47,16 @@ module PostsHelper
       }
 
       # http://layar.com/documentation/browser/api/getpois-response/hotspots/
-      # res[:transform] = {
-      #   :rotate => {  
-      #      :rel => true,    
-      #      :axis => { :x => 0, :y => 0, :z => 1 },
-      #      :angle => 0   
-      #   },  
-      #   :translate => { :x => 0, :y => -0.075, :z => ENV['APOLLO_TRANSLATE_Z'] || 1.75 },  
-      #   :scale => calculate_scale(post.distance.to_i),
-      #   :distance => post.distance
-      # }
+      res[:transform] = {
+        :rotate => {  
+           :rel => true,    
+           :axis => { :x => 0, :y => 0, :z => 1 },
+           :angle => 0   
+        },  
+        :translate => { :x => 0, :y =>0, :z => ENV['APOLLO_TRANSLATE_Z'] || 1.75 },  
+        # :scale => calculate_scale(post.distance.to_i),
+        :distance => post.distance
+      }
     end
     res
   end
