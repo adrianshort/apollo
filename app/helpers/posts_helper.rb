@@ -8,6 +8,10 @@ module PostsHelper
       image_url = subscription.layer.icon_url
     end
 
+    scale = 1.0
+    scale = 2.0 if post.distance < 50
+    scale = post.distance / 1000 if post.distance > 1000
+
     res = {
       :id => post.id,
       :imageURL => image_url,
@@ -50,7 +54,7 @@ module PostsHelper
            :angle => 0   
         },  
         :translate => { :x => 0, :y => -0.075, :z => ENV['APOLLO_TRANSLATE_Z'] || 1.75 },  
-        :scale => 1.0
+        :scale => scale
       }
     end
     res
