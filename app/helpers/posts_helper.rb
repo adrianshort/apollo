@@ -8,9 +8,10 @@ module PostsHelper
       image_url = subscription.layer.icon_url
     end
 
+    distance = post.distance.to_i
     scale = 1.0
-    scale = 2.0 if post.distance < 50
-    scale = post.distance / 1000 if post.distance > 1000
+    scale = 0.5 if distance < 100.0
+    scale = distance / 1000.0 if distance > 1000.0
 
     res = {
       :id => post.id,
