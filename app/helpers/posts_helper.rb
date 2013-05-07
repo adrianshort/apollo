@@ -49,7 +49,7 @@ module PostsHelper
            :axis => { :x => 0, :y => 0, :z => 1 },
            :angle => 0   
         },  
-        :translate => { :x => 0, :y => -0.075, :z => 3 },  
+        :translate => { :x => 0, :y => -0.075, :z => ENV['APOLLO_TRANSLATE_Z'] || 1.75 },  
         :scale => 1.0
       }
     end
