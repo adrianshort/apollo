@@ -5,7 +5,7 @@
 %p
   = link_to "Fetch", fetch_feed_url(@feed), :class => "button"
   &nbsp;
-  %a.button{ :href => "http://validator.w3.org/appc/check.cgi?url=#{@feed.feed_url}"}<
+  %a.button{ :href => "https://validator.w3.org/feed/check.cgi?url=#{@feed.feed_url}"}<
     Validate
   &nbsp;
   = link_to 'Edit', edit_feed_path(@feed), :class => "button"
